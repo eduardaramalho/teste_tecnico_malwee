@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:teste_tecnico/model/produto.dart';
 
@@ -14,7 +16,43 @@ class ProductProvider extends ChangeNotifier {
 
   List<Product> cart = [];
 
+  void add(Product newProduct){
+    products.add(newProduct);
+    notifyListeners();
+  }
+
+  void deleteProduct(int id){
+    int index = products.indexWhere((product) => product.id == id);
+    products.removeAt(index);
+    cart.removeAt(index);
+    notifyListeners();
+  }
+
+  void editProduct(int id, Product newProduct){
+    int index = products.indexWhere((product) => product.id == id);
+    products[index].nome = newProduct.nome;
+    products[index].preco = newProduct.preco;
+    products[index].material = newProduct.material;
+    products[index].url = newProduct.url;
+    notifyListeners();
+  }
+
+  void addToCart(Product newProduct){
+    cart.add(newProduct);
+    notifyListeners();
+  }
+
+  void deleteFromCart(int id){
+    int index = cart.indexWhere((product) => product.id == id);
+    cart.removeAt(index);
+    notifyListeners();
+  }
+
   double get cartTotalPrice {
-   return 0/1;
+    double totalValue = 0;
+    for(int i = 0; i < cart.length; i++){
+      totalValue += cart[i].preco;
+    }
+    return totalValue;
   }
 }

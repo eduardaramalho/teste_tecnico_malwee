@@ -31,7 +31,9 @@ class ShopCart extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ProductCard(
                     product: provider.cart[index], 
-                    onButtonTapped: () {},
+                    onButtonTapped: () {
+                      provider.deleteFromCart(provider.cart[index].id);
+                    },
                     iconData: Icons.delete_rounded, 
                     buttonColor: Colors.red.withOpacity(0.2)
                   );
@@ -40,7 +42,11 @@ class ShopCart extends StatelessWidget {
             ),
             CartInfoCard(
               totalPrice: provider.cartTotalPrice,
-              onButtonTapped: () {}
+              onButtonTapped: () {
+                const SnackBar(content: Text('Compra realizada!'),
+                  backgroundColor: Colors.green,
+                );
+              }
             ),
           ],
         ),

@@ -42,7 +42,9 @@ class _ProductListState extends State<ProductList> {
         itemCount: provider.products.length,
         itemBuilder: (context, index) => ProductCard(
           product: provider.products[index], 
-          onButtonTapped: () {},
+          onButtonTapped: () {
+            provider.cart.add(provider.products[index]);
+          },
           buttonColor: Colors.green.withOpacity(0.2),
           iconData: Icons.add_shopping_cart_rounded,
         )

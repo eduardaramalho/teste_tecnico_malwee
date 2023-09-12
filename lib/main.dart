@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:teste_tecnico/pages/product_list.dart';
 import 'package:teste_tecnico/pages/product_management.dart';
+import 'package:teste_tecnico/providers/product_provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,14 +11,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Teste técnico Malwee',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (_) => ProductProvider(),
+      child: MaterialApp(
+        title: 'Teste técnico Malwee',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'MALWEE'),
       ),
-      home: const MyHomePage(title: 'MALWEE'),
     );
   }
 }
